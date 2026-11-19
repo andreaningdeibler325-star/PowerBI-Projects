@@ -21,4 +21,19 @@ April 28, 2026
 
 ## Dataset
 Microsoft Financial Sample Excel workbook.
+
+## Dashboard Screenshots
+
+### Page 1 — Executive Summary
+
+![Executive Summary](images/executive_finance_dashboard_page1.png)
+
+### Page 2 — Advanced Financial Analysis
+
+![Advanced Financial Analysis](images/executive_finance_dashboard_page2.png)
+
+### Page 3 — Profitability Analysis
+
+![Profitability Analysis](images/executive_finance_dashboard_page3.png)
+  
   
