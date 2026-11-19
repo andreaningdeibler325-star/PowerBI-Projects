@@ -35,5 +35,3 @@ Microsoft Financial Sample Excel workbook.
 ### Page 3 — Profitability Analysis
 
 ![Profitability Analysis](images/executive_finance_dashboard_page3.png)
-  
-  
