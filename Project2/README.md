@@ -2,6 +2,15 @@
 
 A four-page Power BI portfolio report analyzing project progress, task status, budgets, and costs across a project-management dataset.
 
+## Opening the Power BI Report
+
+1. Download [Projects_Performance_Analytics.pbix](Projects_Performance_Analytics.pbix).
+2. Open the file using Microsoft Power BI Desktop.
+3. Explore the four report pages and their DAX-powered visualizations.
+4. To refresh the data from Excel, update the source workbook connection under **Transform data → Data source settings**.
+
+**Note:** The Power BI report and dashboard screenshots are included in this repository. The original Excel source workbook is not currently provided separately.
+
 ## Snapshot
 
 The dashboard screenshots show these portfolio-level metrics:
@@ -18,61 +27,99 @@ The dashboard screenshots show these portfolio-level metrics:
 | Total actual cost | $26.98M |
 | Budget remaining | $10.26M |
 
-Budget figures are rounded to two decimal places in millions in the report. The exact results depend on source-data refresh and active report filters.
+Budget figures are rounded to two decimal places in millions. Exact results depend on source-data refresh and active report filters.
 
-## Report pages
+## Report Pages
 
-1. **Project Portfolio Executive Overview** — nine KPI cards covering project count, task records, completion, developers, and financial totals.
-2. **Task Status Distribution** — donut chart showing Completed, Delayed, Not Started, Cancelled, In Progress, and On Hold task-record counts.
-3. **Project Completion Analysis** — horizontal bar chart of completion percentages across 30 projects, sorted for easy comparison.
-4. **Budget & Resource Analysis** — comparison of planned budget and actual costs by project. (The current screenshots show a budget comparison; developer-workload analysis remains a possible enhancement.)
+1. **Project Portfolio Executive Overview** — Nine KPI cards covering project count, task records, completion, developers, and financial totals.
+2. **Task Status Distribution** — Donut chart showing Completed, Delayed, Not Started, Cancelled, In Progress, and On Hold task-record counts.
+3. **Project Completion Analysis** — Horizontal bar chart of completion percentages across 30 projects, sorted for easy comparison.
+4. **Budget & Resource Analysis** — Comparison of planned budgets and actual costs by project. Developer-workload analysis remains a possible enhancement.
 
 ## Screenshots
 
-### Executive overview
+### Executive Overview
+
 ![Executive overview](screenshots/01-executive-overview.png)
 
-### Task status distribution
+### Task Status Distribution
+
 ![Task status distribution](screenshots/02-task-status-distribution.png)
 
-### Project completion analysis
+### Project Completion Analysis
+
 ![Project completion analysis](screenshots/03-project-completion-analysis.png)
 
-### Budget vs. actual costs
+### Budget vs. Actual Costs
+
 ![Budget and resource analysis](screenshots/04-budget-resource-analysis.png)
 
-## Tools and skills
+## Tools and Skills
 
-- Power BI Desktop; Power Query; DAX
-- Excel project-management data
-- Measures, `CALCULATE`, `COUNTROWS`, `SUM`, `DIVIDE`, and filter context
-- Clustered bar/column charts, KPI cards, donut charts, formatting and data-quality validation
+- Microsoft Power BI Desktop, Power Query, and DAX
+- Excel-based project-management data
+- DAX measures, `CALCULATE`, `COUNTROWS`, `SUM`, `DIVIDE`, and filter context
+- KPI cards, donut charts, clustered bar and column charts
+- Data visualization, dashboard formatting, and data-quality validation
 
-## Key DAX logic
+## Key DAX Logic
 
-`Project Completion %` divides completed task records in each project's filter context by all task records in that same context. See [DAX measures](docs/DAX_Measures.md) for the implemented formula and budget-verification measures.
+The `Project Completion %` measure divides completed task records by total task records within each project's filter context.
 
-> **Metric definition:** This is a *record-count completion ratio*, not an effort-weighted or cost-weighted progress measure. Cancelled task records remain in the denominator. Repeated task names are treated as separate records.
+```dax
+Project Completion % =
+VAR TotalProjectTasks =
+    COUNTROWS('Project Management')
+VAR CompletedProjectTasks =
+    CALCULATE(
+        COUNTROWS('Project Management'),
+        'Project Management'[Status] = "Completed"
+    )
+RETURN
+    DIVIDE(
+        CompletedProjectTasks,
+        TotalProjectTasks,
+        0
+    )
+```
 
-## Opening the report
+**Metric definition:** This is a record-count completion ratio, not an effort-weighted or cost-weighted progress measure. Cancelled task records remain in the denominator, and repeated task names are counted as separate records.
 
-1. Open the `.pbix` file in Power BI Desktop (once added under `powerbi/`).
-2. Review **Transform data → Data source settings** and update the Excel source path if the workbook is located elsewhere.
-3. If a sample workbook is included under `data/`, confirm that only non-sensitive, shareable information is present.
-4. Click **Refresh** and review the calculated KPI totals and visuals.
+## Data Validation
 
-**Note:** This starter upload package contains documentation and screenshots, but does *not* contain the `.pbix` or Excel workbook. Add those separately from the local PC before claiming the repository is a runnable Power BI deliverable.
+Project-level financial calculations were verified against Power BI tooltips using DAX measures with project-specific filters.
 
-## Future enhancement: scheduled cloud refresh
+**Analytics Dashboard — Example**
 
-The initial version imports Excel data. A future iteration could store a suitable workbook in OneDrive for Business or SharePoint Online, connect through an appropriately configured Power BI data source, publish the semantic model, and enable scheduled refresh. This is *planned*, not implemented in this repository. Details: [refresh roadmap](docs/Refresh_Roadmap.md).
+| Financial Metric | Value |
+|---|---:|
+| Planned Budget | $1,734,000 |
+| Actual Cost | $1,424,100 |
+| Remaining Budget | $309,900 |
 
-## Validation and security
+## Future Enhancement: Scheduled Cloud Refresh
 
-- Cross-check project-specific measures against project-level source records and tooltip values.
-- Example project validation in the report: **Analytics Dashboard** has a planned budget of **$1,734,000** and actual costs of **$1,424,100**, leaving **$309,900**.
-- Review the workbook and PBIX before public upload. Power BI files may contain imported data, query details, or connection metadata. Never commit passwords, tokens, credentials, or confidential source data.
+The initial version imports Excel data.
 
-## Status
+A future enhancement could use **OneDrive for Business or SharePoint Online** as a cloud-hosted data source, connected to Power BI Service.
 
-Report designed and visually reviewed; external repository publication, `.pbix` addition, reproducibility checks, and automatic refresh setup are separate steps.
+This could enable:
+
+- Automated retrieval of updated project-management data
+- Scheduled semantic-model refresh
+- Updated dashboard KPIs and visualizations following successful refresh
+- Reduced manual data-upload effort
+
+**Status:** Cloud synchronization is planned and has not yet been implemented.
+
+## Security
+
+Power BI files may contain imported data, query details, and connection metadata. Source files and reports should be reviewed before public distribution. Credentials, tokens, and confidential information must not be committed.
+
+## Project Status
+
+**Completed and published on GitHub.**
+
+The repository includes the Power BI report (`.pbix`), four dashboard screenshots, and project documentation.
+
+Future enhancements may include developer-workload analysis, scheduled cloud refresh, and improved reporting automation.
