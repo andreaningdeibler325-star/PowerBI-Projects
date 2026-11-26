@@ -4,7 +4,7 @@ A four-page interactive Power BI report analyzing workforce demographics, hiring
 
 ## Opening the Power BI Report
 
-1. Download [HR_Employment_Analysis.pbix](HR_Employment_Analysis.pbix).
+1. Download [HR Employment Analysis.pbix](HR%20Employment%20Analysis.pbix).
 2. Open the file using Microsoft Power BI Desktop.
 3. Explore the four interactive report pages and their DAX-powered visualizations.
 4. To refresh the data from Excel, update the source workbook connection under **Transform data → Data source settings**.
