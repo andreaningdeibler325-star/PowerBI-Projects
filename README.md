@@ -29,7 +29,7 @@ Through hands-on practice, I aim to transform raw data into meaningful insights,
 | [Project 2](Project2/) | Projects Performance Analytics | Completed |
 | [Project 3a](Project3a/) | HR Employment Analysis | Completed |
 | Project 3b | IBM HR Employee Attrition & Performance Analytics | Planned |
-| Project 4 | Hospital Patient Analytics | Planned |
+| [Project 4](Project4/) | Support Tickets Data Analysis | Completed |
 | Project 5 | Student Performance Analytics | Planned |
 | Project 6 | SaaS Subscription Analytics | Planned |
 | Project 7 | Supply Chain Analytics | Planned |
