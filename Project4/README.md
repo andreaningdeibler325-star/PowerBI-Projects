@@ -74,7 +74,7 @@ An executive-level dashboard featuring eight KPI cards summarizing overall custo
 - SLA compliance rate by issue category
 - Monthly SLA compliance rate
 
-![Service and SLA Performance](screenshots/03-service-sla-performance.png)
+![Service and SLA Performance](screenshots/03-service%20%26%20SLA%20Performance.png)
 
 ### Page 4 — Agent Performance
 
